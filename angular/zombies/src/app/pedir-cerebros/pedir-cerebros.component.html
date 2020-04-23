@@ -1,0 +1,60 @@
+<div *ngIf="logeado" class="col-lg-12">
+    <div class="main-card mb-12 card">
+        <div class="card-body">
+            <h5 class="card-title">Lista de cerebros</h5>
+            <!--<table class="mb-0 table table-hover">
+                <thead>
+                    <tr>
+                        <th>Sabor</th>
+                        <th>IQ</th>
+                        <th>Descripcion</th>
+                        <th>Imagen</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cerebro of cerebros | async" >
+                        <td *ngIf="usuariovalido(cerebro)">{{cerebro.flavor}}</td>
+                        <td *ngIf="usuariovalido(cerebro)">{{cerebro.iq}}</td>
+                        <td *ngIf="usuariovalido(cerebro)">{{cerebro.description}}</td>
+                        <td *ngIf="usuariovalido(cerebro)"><img src="{{cerebro.picture}}" alt="Error al cargar" width="70px" height="auto"></td>
+                        <td *ngIf="usuariovalido(cerebro)">
+                            <button (click)="actualizar(cerebro._id, cerebro.flavor, cerebro.iq, cerebro.description, cerebro.picture, cerebro.usuario)" class="btn mr-2 mb-2 btn-primary" data-toggle="modal" data-target="#UpdateCerebrosModal">Actualizar</button>
+                            <button (click)="eliminar(cerebro._id)" class="btn mr-2 mb-2 btn-primary">Borrar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>-->
+            <form #MyForm="ngForm" class="modal-body">
+                <div class="position-relative form-group">
+                    <label for="sabor" class="">Sabor</label>
+                    <select [(ngModel)]="sabor" name="select" id="sabor" class="form-control">
+                        <option value="" selected>Sabor</option>
+                        <ng-container *ngFor="let cerebro of cerebros | async ">
+                            <option *ngIf="usuariovalido(cerebro)">
+                                {{cerebro.flavor}}
+                            </option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div class="position-relative form-group">
+                    <label for="cantidad" class="">Numero de cerebros</label>
+                    <input [(ngModel)]="cantidad" name="cantidad" id="cantidad" placeholder="Numero de cerebros" type="number" class="form-control">
+                </div>
+                <div class="position-relative form-group">
+                    <label for="entrega" class="">Metodo de envio</label>
+                    <select [(ngModel)]="entrega" name="select" id="entrega" class="form-control">
+                        <option value="" selected>Metodo de envio</option>
+                        <option>Gold (De hoy en 3 días)</option>
+                        <option>Silver (De hoy en 7 días)</option>
+                        <option>Bronze (De hoy en 15 días)</option>
+                    </select>
+                </div>
+            </form>
+            <div class="{{clase}}">
+                {{error}}
+            </div>
+            <button (click)="Seleccionar(MyForm)" class="btn mr-2 mb-2 btn-primary">Seleccionar</button>
+        </div>
+    </div>
+</div>
